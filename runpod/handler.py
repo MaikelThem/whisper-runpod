@@ -126,4 +126,9 @@ def handler(job):
                 pass
 
 
-runpod.serverless.start({"handler": handler})
+if __name__ == "__main__":
+    print(
+        f"whisper-runpod ready model={MODEL_SIZE} device={DEVICE} compute={COMPUTE_TYPE}",
+        flush=True,
+    )
+    runpod.serverless.start({"handler": handler})

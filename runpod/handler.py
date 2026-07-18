@@ -127,8 +127,18 @@ def handler(job):
 
 
 if __name__ == "__main__":
-    print(
-        f"whisper-runpod ready model={MODEL_SIZE} device={DEVICE} compute={COMPUTE_TYPE}",
-        flush=True,
-    )
-    runpod.serverless.start({"handler": handler})
+    try:
+        print(
+            f"whisper-runpod ready model={MODEL_SIZE} device={DEVICE} compute={COMPUTE_TYPE}",
+            flush=True,
+        )
+        runpod.serverless.start({"handler": handler})
+    except Exception:
+        traceback.print_exc()
+        sys.stdout.flush()
+        sys.stderr.flush()
+        # Keep container alive briefly so RunPod logs capture the traceback
+        import time
+
+        time.sleep(30)
+        raise

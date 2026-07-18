@@ -10,7 +10,7 @@ RUN apt-get update \
 
 RUN pip install --no-cache-dir \
     faster-whisper==1.1.0 \
-    runpod==1.9.1 \
+    "runpod>=1.10.1" \
     httpx==0.27.0
 
 COPY whisper_config.py /whisper_config.py
